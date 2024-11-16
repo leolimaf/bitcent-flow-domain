@@ -28,10 +28,13 @@ jobs:
     - name: Build project
       run: dotnet build BitcentFlow.Domain/BitcentFlow.Domain.csproj --configuration Release
 
-    # 5. Gerar o número de versão baseado na data e hora
-    - name: Generate version number
+    # 5. Gerar o número de versão baseado na data e hora de Brasília
+    - name: Generate version number (Brasília Time)
       id: version
-      run: echo "VERSION=$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
+      run: |
+        export TZ="America/Sao_Paulo"
+        VERSION=$(date +'%Y.%m.%d-%H%M%S')
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
 
     # 6. Empacotar o projeto como um pacote NuGet
     - name: Pack project
