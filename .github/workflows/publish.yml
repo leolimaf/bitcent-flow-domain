@@ -28,10 +28,15 @@ jobs:
     - name: Build project
       run: dotnet build BitcentFlow.Domain/BitcentFlow.Domain.csproj --configuration Release
 
-    # 5. Empacotar o projeto como um pacote NuGet
-    - name: Pack project
-      run: dotnet pack BitcentFlow.Domain/BitcentFlow.Domain.csproj --configuration Release --no-build
+    # 5. Gerar o número de versão baseado na data e hora
+    - name: Generate version number
+      id: version
+      run: echo "VERSION=$(date +'%Y.%m.%d.%H%M%S')" >> $GITHUB_ENV
 
-    # 6. Publicar para o GitHub Packages
+    # 6. Empacotar o projeto como um pacote NuGet
+    - name: Pack project
+      run: dotnet pack BitcentFlow.Domain/BitcentFlow.Domain.csproj --configuration Release --no-build -p:PackageVersion=${{ env.VERSION }}
+
+    # 7. Publicar para o GitHub Packages
     - name: Publish to GitHub Packages
       run: dotnet nuget push "BitcentFlow.Domain/bin/Release/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.NUGET_AUTH_TOKEN }} --skip-duplicate
