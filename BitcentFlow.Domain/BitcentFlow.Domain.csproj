@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>1.0.0</Version>
+        <Authors>Leonardo Lima</Authors>
+        <Company>BitcentFlow</Company>
+        <Description>Pacote de domínio para a solução Bitcentflow</Description>
+        <PackageTags>bitcentflow;domain;entities</PackageTags>
+        <RepositoryUrl>https://github.com/leolimaf/bitcent-flow-domain</RepositoryUrl>
+    </PropertyGroup>
+
+</Project>
